@@ -3,29 +3,52 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#080706" />
+  <meta name="theme-color" content="#070605" />
   <meta name="description" content="Explore temples and sacred heritage across Chhatrapati Sambhajinagar district by age, historical value, deity and region." />
   <title>Sambhajinagar Sacred Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="preconnect" href="https://unpkg.com" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="ambient ambient-a"></div>
-  <div class="ambient ambient-b"></div>
+  <div class="scene" aria-hidden="true">
+    <div class="aurora aurora-one"></div>
+    <div class="aurora aurora-two"></div>
+    <div class="grain"></div>
+    <div class="sacred-orbit orbit-a"></div>
+    <div class="sacred-orbit orbit-b"></div>
+  </div>
 
   <div class="app-shell">
     <aside class="sidebar glass" id="sidebar">
       <header class="brand-block">
-        <div class="eyebrow"><span class="eyebrow-dot"></span>Sacred heritage atlas · Maharashtra</div>
-        <div class="brand-row">
-          <div>
-            <h1>Sambhajinagar<br><em>Sacred Atlas</em></h1>
-            <p class="lede">Search the district's temples, cave shrines and pilgrimage places by age, historical value, deity and region.</p>
-          </div>
+        <div class="brand-topline">
+          <div class="eyebrow"><span class="eyebrow-dot"></span>Sacred heritage atlas · Maharashtra</div>
           <button class="icon-button mobile-close" id="mobileClose" aria-label="Close explorer">×</button>
         </div>
+
+        <div class="brand-lockup">
+          <div class="brand-seal" aria-hidden="true">
+            <svg viewBox="0 0 100 100" role="img">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="1" opacity=".65"/>
+              <circle cx="50" cy="50" r="31" fill="none" stroke="currentColor" stroke-width="1" opacity=".35"/>
+              <path d="M50 10 59 40 90 50 59 60 50 90 41 60 10 50 41 40Z" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".8"/>
+              <path d="M50 27 57 43 73 50 57 57 50 73 43 57 27 50 43 43Z" fill="currentColor" opacity=".18"/>
+              <circle cx="50" cy="50" r="4" fill="currentColor"/>
+            </svg>
+          </div>
+          <div>
+            <h1>Sambhajinagar<br><em>Sacred Atlas</em></h1>
+            <p class="lede">A living map of temples, rock-cut sanctuaries and pilgrimage landscapes across Chhatrapati Sambhajinagar.</p>
+          </div>
+        </div>
+
+        <div class="era-line"><span>Explore by evidence</span><i></i><span>age</span><i></i><span>heritage value</span></div>
+
         <div class="top-stats">
           <div><strong id="totalPlaces">0</strong><span>mapped places</span></div>
           <div><strong id="datedPlaces">0</strong><span>dated sites</span></div>
@@ -34,6 +57,8 @@
       </header>
 
       <section class="control-zone">
+        <div class="section-label"><span>01</span><strong>Discover</strong><i></i></div>
+
         <div class="search-wrap">
           <span class="search-icon">⌕</span>
           <input id="search" type="search" autocomplete="off" placeholder="Temple, deity, village, dynasty…" aria-label="Search temples" />
@@ -41,7 +66,7 @@
         </div>
 
         <div class="quick-row" id="quickFilters">
-          <button class="quick active" data-quick="all">All</button>
+          <button class="quick active" data-quick="all">All places</button>
           <button class="quick" data-quick="ancient">500+ years</button>
           <button class="quick" data-quick="top">Top heritage</button>
           <button class="quick" data-quick="dated">Dated only</button>
@@ -84,7 +109,7 @@
         </label>
 
         <div class="results-meta">
-          <div><strong id="resultCount">0</strong> places match</div>
+          <div><strong id="resultCount">0</strong> places match your view</div>
           <button id="resetButton">Reset filters</button>
         </div>
       </section>
@@ -92,19 +117,22 @@
       <section class="temple-list" id="templeList" aria-live="polite"></section>
 
       <footer class="sidebar-footer">
-        <span>Dates marked “estimated” are deliberately separated from verified structure dates.</span>
-        <button id="methodButton">How scoring works</button>
+        <div><span class="footer-mark">◇</span> Research catalogue · dates distinguish verified evidence from estimates.</div>
+        <button id="methodButton">Scoring method</button>
       </footer>
     </aside>
 
     <main class="map-stage glass">
+      <div class="map-vignette" aria-hidden="true"></div>
+      <div class="map-grid" aria-hidden="true"></div>
       <div id="map" aria-label="Interactive map of temple locations"></div>
 
       <div class="map-topbar">
         <button class="floating-button mobile-open" id="mobileOpen">☰ <span>Explore</span></button>
         <div class="map-heading">
-          <span>Chhatrapati Sambhajinagar district</span>
-          <strong id="mapStatus">Showing all mapped sacred places</strong>
+          <div class="map-heading-kicker"><span></span>Live heritage map</div>
+          <strong>Chhatrapati Sambhajinagar</strong>
+          <small id="mapStatus">Showing all mapped sacred places</small>
         </div>
         <div class="map-actions">
           <button class="floating-button" id="fitButton" title="Fit visible places">⌗ <span>Fit map</span></button>
@@ -112,11 +140,17 @@
         </div>
       </div>
 
+      <div class="map-corner-story">
+        <span class="story-index">ATLAS / 01</span>
+        <strong>From basalt caves<br>to living shrines.</strong>
+        <p>Navigate centuries of sacred architecture across the Deccan landscape.</p>
+      </div>
+
       <div class="legend-card">
-        <span><i class="legend-dot exceptional"></i>90–100</span>
-        <span><i class="legend-dot major"></i>75–89</span>
-        <span><i class="legend-dot local"></i>under 75</span>
-        <small>historical value</small>
+        <div class="legend-title">Historical value</div>
+        <span><i class="legend-dot exceptional"></i>90–100 <b>Exceptional</b></span>
+        <span><i class="legend-dot major"></i>75–89 <b>Major</b></span>
+        <span><i class="legend-dot local"></i>&lt;75 <b>Local</b></span>
       </div>
 
       <div class="map-note">OpenStreetMap base · research catalogue, not an official heritage register</div>
@@ -126,6 +160,7 @@
   <section class="detail-panel glass" id="detailPanel" aria-hidden="true">
     <button class="detail-close" id="detailClose" aria-label="Close temple details">×</button>
     <div class="detail-hero" id="detailHero">
+      <div class="detail-ornament" aria-hidden="true"></div>
       <span class="detail-kicker" id="detailKicker"></span>
       <h2 id="detailName"></h2>
       <p id="detailArea"></p>
@@ -144,7 +179,7 @@
         <div id="sourceLinks"></div>
       </div>
       <div class="detail-actions">
-        <a id="directionsLink" target="_blank" rel="noopener">Directions ↗</a>
+        <a id="directionsLink" target="_blank" rel="noopener">Open directions ↗</a>
         <button id="shareButton">Copy place link</button>
       </div>
     </div>
