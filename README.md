@@ -1,26 +1,28 @@
-# Sambhajinagar Temple Map
+# Sambhajinagar Sacred Atlas
 
-Interactive temple and sacred-heritage explorer for Chhatrapati Sambhajinagar, Maharashtra.
+A mobile-first interactive temple and sacred-heritage map for Chhatrapati Sambhajinagar district, Maharashtra.
 
 ## Features
 
-- Interactive Leaflet/OpenStreetMap map
-- Search by temple, deity, or area
-- Filters for Heritage, Pilgrimage, and City Temple locations
-- Temple cards with descriptions
-- “Near me” geolocation button
-- Direct Google Maps directions links
-- Responsive mobile layout
-- Static-site friendly: works with GitHub Pages
+- Full-screen Leaflet/OpenStreetMap explorer
+- Search by temple, deity, village, period, architecture and tradition
+- Minimum-age filter
+- Historical-value filter (0–100)
+- Sort by historical value, age or name
+- Hindu, Jain, Buddhist and Warkari sacred-heritage entries
+- Detail panels with chronology notes, evidence confidence and sources
+- Deep links for individual places
+- Browser geolocation and directions links
+- Responsive mobile sidebar
 
-## Run locally
+## Data philosophy
 
-Open `index.html` in a browser, or serve the directory with any static web server.
+The catalogue intentionally separates **the age of a sacred tradition** from **the age of the surviving structure**. When a reliable construction date is not available, the age is left unknown rather than inferred from folklore. Historical-value scores are editorial research scores and are not official government heritage designations.
 
-## GitHub Pages
+## Current seed coverage
 
-This repo is ready for GitHub Pages deployment from the `main` branch root.
+The initial research catalogue includes Ellora, Verul, Khuldabad, the city, Paithan, Kachner, Sillod, Gangapur and surrounding pilgrimage areas. It is designed to expand as more temple records and primary sources are verified.
 
-## Data note
+## Stack
 
-This is a curated starter map. Temple details and coordinates should be verified before using it as an authoritative tourism or heritage database.
+Static HTML/CSS/JavaScript + Leaflet 1.9.4 + OpenStreetMap tiles. No build step required.
